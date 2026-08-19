@@ -161,9 +161,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use("/", async(req, res) => {
-  res.send("the api is running")
-})
+
 
 app.post('/mcp', async (req, res) => {
   const transport = new StreamableHTTPServerTransport({ sessionIdGenerator: undefined });
@@ -320,6 +318,10 @@ app.get('/api/conversations/:id', async (req, res) => {
 app.delete('/api/conversations/:id', async (req, res) => {
   await Conversation.findByIdAndDelete(req.params.id);
   res.status(204).end();
+});
+
+app.get("/", (req, res) => {
+  res.send("the api is running");
 });
 
 const PORT = process.env.PORT || 5000;
