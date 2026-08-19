@@ -135,7 +135,7 @@ import {
   tool,
 } from 'ai';
 import { connectDb } from './db.js';
-import Conversation from './models/Conversation.js';
+import Conversation from './models/conversation.js';
 import fs from 'fs/promises';
 import { execSync } from 'child_process';
 import path from 'path';
@@ -160,6 +160,10 @@ server.registerTool(
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+app.use("/", async(req, res) => {
+  res.send("the api is running")
+})
 
 app.post('/mcp', async (req, res) => {
   const transport = new StreamableHTTPServerTransport({ sessionIdGenerator: undefined });
